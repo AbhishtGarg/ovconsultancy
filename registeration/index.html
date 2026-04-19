@@ -831,6 +831,8 @@
                 if (response.ok) {
                     document.getElementById('registration-form').reset();
                     document.getElementById('success-message').style.display = 'block';
+                    btn.innerHTML = '<i class="fa fa-paper-plane"></i> Submit Registration';
+                    btn.disabled = false;
                     window.scrollTo({ top: document.getElementById('success-message').offsetTop - 100, behavior: 'smooth' });
                 } else {
                     btn.innerHTML = '<i class="fa fa-paper-plane"></i> Submit Registration';
