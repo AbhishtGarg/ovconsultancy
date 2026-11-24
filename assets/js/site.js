@@ -98,16 +98,6 @@
     bs.forEach(function(b,i){b.addEventListener('click',function(){sel(i)})});sel(0);
   });
 
-  /* ---------- Testimonial carousel ---------- */
-  $$('[data-carousel]').forEach(function(w){
-    var items;try{items=JSON.parse($('script[type="application/json"]',w).textContent)}catch(e){return}
-    var i=0;
-    function show(n){i=(n+items.length)%items.length;var v=items[i];
-      $('[data-v=q]',w).textContent=v.q;$('[data-v=n]',w).textContent=v.n;$('[data-v=d]',w).textContent=v.d;$('[data-v=a]',w).src=v.src;
-      $$('.dots span',w).forEach(function(s,j){s.classList.toggle('on',j===i)})}
-    $('[data-v=prev]',w).addEventListener('click',function(){show(i-1)});$('[data-v=next]',w).addEventListener('click',function(){show(i+1)});
-  });
-
   /* ---------- Document checklist with progress ---------- */
   $$('[data-checklist]').forEach(function(w){
     var boxes=$$('input[type=checkbox]',w),bar=$('.bar i',w),txt=$('[data-out=count]',w);
