@@ -31,6 +31,8 @@
     uk:{name:'United Kingdom',code:'LHR',city:'London',intake:'Sep, Jan',dist:'≈ 6,700 km',test:'IELTS or PTE',link:'/country/uk/',label:'Study in the UK'},
     us:{name:'USA',code:'JFK',city:'New York',intake:'Aug–Sep, Jan',dist:'≈ 11,750 km',test:'IELTS or PTE',link:'/country/usa/',label:'Study in the USA'},
     au:{name:'Australia',code:'MEL',city:'Melbourne',intake:'Feb, Jul',dist:'≈ 10,200 km',test:'IELTS or PTE',link:'/country/australia/',label:'Study in Australia'},
+    eu:{name:'Europe',code:'FRA',city:'Frankfurt',intake:'Sep–Oct, Feb–Mar',dist:'≈ 6,100 km',test:'IELTS or PTE',link:'/country/europe/',label:'Study in Europe'},
+    as:{name:'Asia',code:'SIN',city:'Singapore',intake:'Varies by country',dist:'≈ 4,150 km',test:'IELTS or PTE',link:'/country/asia/',label:'Study in Asia'},
     nz:{name:'New Zealand',code:'AKL',city:'Auckland',intake:'Feb, Jul',dist:'≈ 12,500 km',test:'IELTS or PTE',link:'/country/new-zealand/',label:'Study in New Zealand'}
   };
   $$('[data-route-board]').forEach(function(board){
@@ -54,7 +56,7 @@
     $$('.chip',board).forEach(function(b){b.addEventListener('click',function(){fly(b.getAttribute('data-c'),true)})});
     $$('.dest',board).forEach(function(g){g.style.cursor='pointer';g.addEventListener('click',function(){fly(g.getAttribute('data-c'),true)})});
     board._fly=fly;
-    setTimeout(function(){fly('ca',true)},450);
+    var first=$('.chip',board);setTimeout(function(){fly(first?first.getAttribute('data-c'):'au',true)},450);
   });
 
   /* ---------- Tabs (journey, exam switch). Arrow keys move between tabs. ---------- */
@@ -84,7 +86,6 @@
       var s=0;ins.forEach(function(r){var v=+r.value;s+=v;r.nextElementSibling.textContent=v.toFixed(1);r.style.setProperty('--p',(v/9*100)+'%')});
       var avg=s/4,band=Math.round(avg*2)/2,diff=band-avg;
       $('[data-out=band]',c).textContent=band.toFixed(1);
-      $('[data-out=sub]',c).textContent='Average '+(+avg.toFixed(3))+(diff>0.001?', rounded up':diff<-0.001?', rounded down':'');
       $('[data-out=msg]',c).textContent=band>=7?'Strong for most courses':band>=6?'Meets many course minimums':'Below most course minimums';
     }
     ins.forEach(function(r){r.addEventListener('input',run)});run();
@@ -102,7 +103,7 @@
     var items;try{items=JSON.parse($('script[type="application/json"]',w).textContent)}catch(e){return}
     var i=0;
     function show(n){i=(n+items.length)%items.length;var v=items[i];
-      $('[data-v=q]',w).innerHTML='<span class="ph">'+v.q+'</span>';$('[data-v=n]',w).innerHTML='<span class="ph">'+v.n+'</span>';$('[data-v=d]',w).innerHTML='<span class="ph">'+v.d+'</span>';$('[data-v=a]',w).textContent=v.a;
+      $('[data-v=q]',w).textContent=v.q;$('[data-v=n]',w).textContent=v.n;$('[data-v=d]',w).textContent=v.d;$('[data-v=a]',w).src=v.src;
       $$('.dots span',w).forEach(function(s,j){s.classList.toggle('on',j===i)})}
     $('[data-v=prev]',w).addEventListener('click',function(){show(i-1)});$('[data-v=next]',w).addEventListener('click',function(){show(i+1)});
   });
@@ -127,23 +128,38 @@
     run();
   });
 
-  /* ---------- Gallery: filters + lightbox ---------- */
+  /* ---------- Gallery: filters, show more + lightbox ---------- */
   $$('[data-gallery]').forEach(function(w){
-    var items=$$('.gallery button',w),dlg=$('dialog',w),cur=0,visible=items;
+    var grid=$('.gallery',w),items=$$('.gallery button',w),dlg=$('dialog',w),img=$('.lb-img img',dlg),vid=$('.lb-img video',dlg),cur=0,visible=[];
+    var more=$('[data-more-btn]',w),f='all';
+    function refresh(){
+      var collapsed=grid.hasAttribute('data-collapsed'),n=0;
+      items.forEach(function(it){var match=f==='all'||it.getAttribute('data-cat')===f;
+        it.hidden=!match||(collapsed&&f==='all'&&it.hasAttribute('data-more'));if(match)n++});
+      visible=items.filter(function(it){return !it.hidden});
+      if(more)more.parentNode.hidden=!(collapsed&&f==='all');
+    }
     $$('.filters .chip',w).forEach(function(ch,_,all){ch.addEventListener('click',function(){
-      all.forEach(function(x){x.setAttribute('aria-pressed',String(x===ch))});
-      var f=ch.getAttribute('data-f');items.forEach(function(it){it.hidden=!(f==='all'||it.getAttribute('data-cat')===f)});
-      visible=items.filter(function(it){return !it.hidden})})});
-    function open(i){cur=i;var it=visible[i];$('.lb-img',dlg).textContent=it.getAttribute('data-title');$('.lb-cap',dlg).textContent=it.getAttribute('data-title')+' ('+(i+1)+' of '+visible.length+')';if(!dlg.open){dlg.showModal?dlg.showModal():dlg.setAttribute('open','')}}
+      all.forEach(function(x){x.setAttribute('aria-pressed',String(x===ch))});f=ch.getAttribute('data-f');refresh()})});
+    if(more)more.addEventListener('click',function(){grid.removeAttribute('data-collapsed');refresh();
+      var first=items.filter(function(it){return it.hasAttribute('data-more')})[0];if(first)first.focus()});
+    function stop(){if(vid){vid.pause();vid.removeAttribute('src');vid.load()}}
+    function open(i){cur=i;var it=visible[i],v=it.getAttribute('data-video');stop();
+      if(v&&vid){img.hidden=true;vid.hidden=false;vid.poster=it.getAttribute('data-full');vid.src=v;var pr=vid.play();if(pr&&pr.catch)pr.catch(function(){})}
+      else{if(vid)vid.hidden=true;img.hidden=false;img.src=it.getAttribute('data-full');img.alt=it.getAttribute('data-title')}
+      $('.lb-cap',dlg).textContent=it.getAttribute('data-title')+' ('+(i+1)+' of '+visible.length+')';
+      if(!dlg.open){dlg.showModal?dlg.showModal():dlg.setAttribute('open','')}}
     items.forEach(function(it){it.addEventListener('click',function(){open(visible.indexOf(it))})});
     $('[data-lb=prev]',dlg).addEventListener('click',function(){open((cur-1+visible.length)%visible.length)});
     $('[data-lb=next]',dlg).addEventListener('click',function(){open((cur+1)%visible.length)});
     $('[data-lb=close]',dlg).addEventListener('click',function(){dlg.close?dlg.close():dlg.removeAttribute('open')});
+    dlg.addEventListener('close',stop);
     dlg.addEventListener('keydown',function(e){if(e.key==='ArrowRight')open((cur+1)%visible.length);if(e.key==='ArrowLeft')open((cur-1+visible.length)%visible.length)});
     dlg.addEventListener('click',function(e){if(e.target===dlg)dlg.close()});
+    refresh();
   });
 
-  /* ---------- Registration form (Formspree, same endpoint and field names as before) ---------- */
+  /* ---------- Registration form (Google Apps Script web app, same field names as before) ---------- */
   $$('[data-reg-form]').forEach(function(form){
     var btn=$('button[type=submit]',form),label=$('.lbl',btn),msg=$('.form-msg',form);
     var rules={
@@ -153,7 +169,7 @@
       phone:function(v){return v.replace(/\D/g,'').replace(/^91/,'').length===10?'':'Enter a 10-digit mobile number.'},
       service:function(v){return v?'':'Choose what you are interested in.'}
     };
-    function check(el){var r=rules[el.name];if(!r)return true;var e=r(el.value),f=el.closest('.field');f.classList.toggle('invalid',!!e);$('.err',f).textContent=e;el.setAttribute('aria-invalid',e?'true':'false');return !e}
+    function check(el){var r=rules[el.name];if(!r)return true;var e=r(el.value),f=el.closest('.field');if(e&&el.getAttribute('data-err'))e=el.getAttribute('data-err');f.classList.toggle('invalid',!!e);$('.err',f).textContent=e;el.setAttribute('aria-invalid',e?'true':'false');return !e}
     Object.keys(rules).forEach(function(n){var el=form.elements[n];if(el){el.addEventListener('blur',function(){check(el)});el.addEventListener('input',function(){if(el.closest('.field').classList.contains('invalid'))check(el)})}});
     function show(kind,text){msg.className='form-msg '+kind;msg.innerHTML=(kind==='ok'?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-6"/></svg>':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><path d="M12 7v6M12 16.5v.5"/></svg>')+'<span>'+text+'</span>';msg.setAttribute('tabindex','-1');msg.focus({preventScroll:true});msg.scrollIntoView({behavior:reduce?'auto':'smooth',block:'center'})}
     var idle=label.textContent,okMsg=form.getAttribute('data-ok')||'Thank you! Your registration has been submitted. We will contact you soon.';
@@ -164,11 +180,38 @@
       if(!ok){first.focus();return}
       busy(true);
       if(form.hasAttribute('data-preview')){setTimeout(function(){busy(false);form.reset();show('ok',okMsg+' (Preview only: nothing was sent.)')},700);return}
-      fetch(form.getAttribute('action'),{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}})
-        .then(function(r){busy(false);if(r.ok){form.reset();show('ok',okMsg)}else{throw new Error()}})
+      // URL-encoded body keeps this a simple CORS request (no preflight), which Apps Script requires
+      fetch(form.getAttribute('action'),{method:'POST',body:new URLSearchParams(new FormData(form))})
+        .then(function(r){if(!r.ok)throw new Error();return r.json()})
+        .then(function(d){busy(false);if(d&&d.ok){form.reset();show('ok',okMsg)}else{throw new Error()}})
         .catch(function(){busy(false);show('bad','Your details could not be sent. Check your connection and try again, or email us at info@ovconsultancy.com.')});
     });
   });
+
+  /* ---------- Universities: country filter + search ---------- */
+  $$('[data-unis]').forEach(function(w){
+    var chips=$$('.filters .chip',w),q=$('input[type=search]',w),f='all';
+    function run(){var t=(q.value||'').trim().toLowerCase(),n=0;
+      $$('.uni-group',w).forEach(function(g){var k=g.getAttribute('data-group'),vis=0;
+        $$('.uni',g).forEach(function(li){var ok=(f==='all'||f===k)&&(!t||li.textContent.toLowerCase().indexOf(t)>=0);li.hidden=!ok;if(ok)vis++});
+        g.hidden=!vis;n+=vis});
+      $('[data-out=n]',w).textContent=n;$('.uni-empty',w).hidden=n>0}
+    chips.forEach(function(c){c.addEventListener('click',function(){chips.forEach(function(x){x.setAttribute('aria-pressed',String(x===c))});f=c.getAttribute('data-f');run()})});
+    q.addEventListener('input',run);
+  });
+
+  /* ---------- Count-up numbers: the final value is in the HTML, so nothing breaks without JS ---------- */
+  (function(){
+    var els=$$('[data-count]'); if(!els.length||reduce||!('IntersectionObserver' in window))return;
+    function fmt(v,d){return d?v.toFixed(d):Math.round(v).toLocaleString('en-IN')}
+    function run(el){
+      var to=parseFloat(el.getAttribute('data-count')),d=+(el.getAttribute('data-dec')||0),t0=null,dur=1600;
+      function tick(t){if(!t0)t0=t;var k=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-k,3);el.textContent=fmt(to*e,d);if(k<1)requestAnimationFrame(tick);else el.textContent=fmt(to,d)}
+      el.textContent=fmt(0,d);requestAnimationFrame(tick);
+    }
+    var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){run(x.target);io.unobserve(x.target)}})},{threshold:.6});
+    els.forEach(function(el){io.observe(el)});
+  })();
 
   /* ---------- Footer year ---------- */
   $$('[data-year]').forEach(function(el){el.textContent=new Date().getFullYear()});

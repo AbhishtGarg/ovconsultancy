@@ -24,6 +24,7 @@
   <button class="burger" id="burger" aria-expanded="false" aria-controls="nav" aria-label="Open menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"/></svg></button>
   <nav class="nav" id="nav" aria-label="Main">
     <ul>
+      <li><a class="nav-link" href="/">Home</a></li>
       <li><a class="nav-link" href="/about-us/">About us</a></li>
       <li><button class="nav-link" aria-expanded="false" aria-controls="d-serv">Services <svg class="chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m2 4 4 4 4-4"/></svg></button>
         <div class="drop" id="d-serv">
@@ -31,7 +32,7 @@
           <a href="/career-counselling/">Career counselling<small>Shortlist courses that fit your profile</small></a>
           <a href="/admission-guidelines/">Admission guidelines<small>SOP, LOR and resume help</small></a>
           <a href="/services/exam-preparation/">Exam preparation<small>IELTS, PTE and English coaching</small></a>
-          <a href="/services/visa-guidelines/">Visa guidelines<small>Study and work visas, documents and interviews</small></a>
+          <a href="/services/visa-guidelines/">Visa guidelines<small>Study visas, documents and interviews</small></a>
         </div></li>
       <li><button class="nav-link" aria-expanded="false" aria-controls="d-coach">Coaching <svg class="chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m2 4 4 4 4-4"/></svg></button>
         <div class="drop" id="d-coach">
@@ -44,11 +45,14 @@
       <li><button class="nav-link" aria-expanded="false" aria-controls="d-country">Countries <svg class="chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m2 4 4 4 4-4"/></svg></button>
         <div class="drop" id="d-country">
           <a href="/country/">Compare countries</a>
+          <a href="/country/australia/">Australia</a>
           <a href="/country/canada/">Canada</a>
           <a href="/country/uk/">United Kingdom</a>
-          <a href="/country/usa/">USA</a>
-          <a href="/country/australia/">Australia</a>
+          <a href="/country/europe/">Europe</a>
           <a href="/country/new-zealand/">New Zealand</a>
+          <a href="/country/usa/">USA</a>
+          <a href="/country/asia/">Asia</a>
+          <a href="/universities/">Universities we work with</a>
         </div></li>
       <li><a class="nav-link" href="/media-room/">Gallery</a></li>
       <li><a class="nav-link" href="/contact-us/">Contact</a></li>
@@ -90,20 +94,20 @@
   </div>
 </div><div class="calc" data-calc aria-labelledby="ccT">
   <h3 id="ccT">IELTS band calculator</h3>
-  <p>Move the sliders to your section scores. Your overall band is the average of the four, rounded to the nearest half band.</p>
+  <p>Move the sliders to your section scores to see your overall band.</p>
   <div class="calc-rows"><div class="calc-row"><label for="cc0">Listening</label><input type="range" id="cc0" min="0" max="9" step="0.5" value="6.5"><output for="cc0">6.5</output></div><div class="calc-row"><label for="cc1">Reading</label><input type="range" id="cc1" min="0" max="9" step="0.5" value="6"><output for="cc1">6.0</output></div><div class="calc-row"><label for="cc2">Writing</label><input type="range" id="cc2" min="0" max="9" step="0.5" value="6"><output for="cc2">6.0</output></div><div class="calc-row"><label for="cc3">Speaking</label><input type="range" id="cc3" min="0" max="9" step="0.5" value="6.5"><output for="cc3">6.5</output></div></div>
-  <div class="calc-out"><b data-out="band" aria-live="polite">6.5</b><p><strong data-out="msg">Overall band</strong><span data-out="sub">Average 6.25, rounded up</span></p></div>
+  <div class="calc-out"><b data-out="band" aria-live="polite">6.5</b><p><strong data-out="msg">Meets many course minimums</strong><span>Overall band</span></p></div>
 </div></div>
 </div></section>
 <section class="sec voices" data-carousel aria-label="Testimonials">
-  <script type="application/json">[{"q": "[Short real quote from a student about their coaching or visa experience, two lines at most.]", "n": "[Student name]", "d": "[Course, university, country]", "a": "S1"}, {"q": "[Second student quote, ideally about the IELTS or PTE score they reached.]", "n": "[Student name]", "d": "[Band or score achieved]", "a": "S2"}, {"q": "[Third quote, ideally from a parent about trust and transparency.]", "n": "[Parent name]", "d": "[Relation, town]", "a": "P1"}]</script>
+  <script type="application/json">[{"q": "Before arriving in Melbourne I was confused about my study visa, but OVC made it all clear for me. And finally I am here. Thank you, Team OVC.", "n": "Sheetal Gagain", "d": "Deakin University, Melbourne, Australia", "a": "SG", "img": "avatar-02.jpg", "src": "/assets/img/gallery/avatar-02.jpg"}, {"q": "Before coming to Sydney I was confused about so many things regarding my study visa. Team OVC made it all clear, and now I am studying here. I advise you all to choose OVC for a better future.", "n": "Ankush Kaliya", "d": "Federation University, Sydney, Australia", "a": "AK", "img": "avatar-05.jpg", "src": "/assets/img/gallery/avatar-05.jpg"}, {"q": "When I was in India preparing to come to Australia, I had so many doubts about my visa. OVC cleared all my doubts and helped me a lot. Thank you, OVC.", "n": "Komal", "d": "Federation University, Sydney, Australia", "a": "K", "img": "avatar-06.jpg", "src": "/assets/img/gallery/avatar-06.jpg"}]</script>
   <div class="shell">
-    <h2 style="font-size:var(--step-1);font-stretch:88%;color:var(--muted);font-weight:700;margin-bottom:1.4rem">Students in their own words <span class="ph-note">Placeholder testimonials</span></h2>
+    <h2 style="font-size:var(--step-1);font-stretch:88%;color:var(--muted);font-weight:700;margin-bottom:1.4rem">Students in their own words</h2>
     <div class="voice-wrap">
       <div>
-        <blockquote class="voice" data-v="q"><span class="ph">[Short real quote from a student about their coaching or visa experience, two lines at most.]</span></blockquote>
-        <div class="voice-by"><span class="av" data-v="a">S1</span><div><b data-v="n"><span class="ph">[Student name]</span></b><small data-v="d"><span class="ph">[Course, university, country]</span></small></div></div>
-        <div class="dots"><span class="on"></span><span></span><span></span></div>
+        <blockquote class="voice" data-v="q">Before arriving in Melbourne I was confused about my study visa, but OVC made it all clear for me. And finally I am here. Thank you, Team OVC.</blockquote>
+        <div class="voice-by"><img class="av" data-v="a" src="/assets/img/gallery/avatar-02.jpg" alt="" width="48" height="48" loading="lazy"><div><b data-v="n">Sheetal Gagain</b><small data-v="d">Deakin University, Melbourne, Australia</small></div></div>
+        <div class="voice-foot"><div class="dots"><span class="on"></span><span></span><span></span></div><a class="voice-link" href="/media-room/">Watch their videos in the gallery</a></div>
       </div>
       <div class="voice-ctrl">
         <button data-v="prev" aria-label="Previous testimonial"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 8H3m4-4L3 8l4 4"/></svg></button>
@@ -115,14 +119,14 @@
 <section class="shell" aria-labelledby="ctaT9" style="margin-top:clamp(1rem,3vw,2rem)">
   <div class="contact">
     <svg class="trail" viewBox="0 0 300 300" fill="none" aria-hidden="true"><path d="M20 280C80 200 160 120 280 30" stroke="#fff" stroke-width="3" stroke-dasharray="6 10"/><path d="M262 22l24 4-12 20z" fill="#fff"/></svg>
-    <div><h2 id="ctaT9">Talk to a counsellor this week</h2><p class="lede">Leave your number and a counsellor will call you back, or reach us directly at either of our branches.</p><form class="qform" action="https://formspree.io/f/xvzdrlgz" method="POST" novalidate data-reg-form data-ok="Thank you! A counsellor will call you shortly.">
+    <div><h2 id="ctaT9">Talk to a counsellor this week</h2><p class="lede">Leave your number and a counsellor will call you back, or reach us directly at either of our branches.</p><form class="qform" action="https://script.google.com/macros/s/AKfycbwpjJn-1EydOlXiKSPhC_EchXk6paL6iQ_tOpXXb9kx5PWRuaDlFogCN1_Ol6dLQQ3zyA/exec" method="POST" novalidate data-reg-form data-ok="Thank you! A counsellor will call you shortly.">
   <div class="form-msg" role="status" aria-live="polite"></div>
   <input type="hidden" name="_subject" value="Quick enquiry from the website">
   <input type="hidden" name="form_type" value="quick_enquiry">
   <div class="qgrid">
-    <div class="field"><label for="ctaT9n">Name</label><input id="ctaT9n" name="first_name" autocomplete="name" required><span class="err"></span></div>
+    <div class="field"><label for="ctaT9n">Name</label><input id="ctaT9n" name="first_name" autocomplete="name" required data-err="Enter your name."><span class="err"></span></div>
     <div class="field"><label for="ctaT9p">Phone</label><input id="ctaT9p" name="phone" type="tel" inputmode="tel" autocomplete="tel" required><span class="err"></span></div>
-    <div class="field"><label for="ctaT9s">Interested in</label><select id="ctaT9s" name="service" required><option value="">Choose one</option><option value="study-abroad">Study abroad</option><option value="visa">Study visa</option><option value="work-visa">Work visa</option><option value="ielts">IELTS coaching</option><option value="pte">PTE coaching</option><option value="other">Something else</option></select><span class="err"></span></div>
+    <div class="field"><label for="ctaT9s">Interested in</label><select id="ctaT9s" name="service" required><option value="">Choose one</option><option value="study-abroad">Study abroad</option><option value="visa">Study visa</option><option value="ielts">IELTS coaching</option><option value="pte">PTE coaching</option><option value="other">Something else</option></select><span class="err"></span></div>
   </div>
   <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
   <div class="qfoot"><button type="submit" class="btn btn-red"><span class="spin" aria-hidden="true"></span><span class="lbl">Request a call back</span></button><a href="/registeration/">Or fill in the full registration form</a></div>
@@ -140,7 +144,7 @@
   <div class="ftr-grid">
     <div>
       <img src="/assets/img/ovc-logo.png" alt="OVC, Offshore Vistas Consultancy" width="360" height="230" loading="lazy">
-      <p class="about">Offshore Vistas Consultancy is an overseas education consultancy with branches in Kurukshetra and Ladwa. We help students get admission to colleges and universities abroad, guide them through study and work visas, and coach them for IELTS and PTE.</p>
+      <p class="about">Offshore Vistas Consultancy is an overseas education consultancy with branches in Kurukshetra and Ladwa. We help students get admission to colleges and universities abroad, guide them through their study visas, and coach them for IELTS and PTE.</p>
       <div class="social" aria-label="Social media">
         <a href="https://www.facebook.com/share/1DojTDkgEs/" aria-label="OVC on Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 8V6c0-1 .5-1.5 1.5-1.5H17V1h-3c-3 0-4 2-4 4.5V8H7v3.5h3V23h4V11.5h3l.5-3.5z"/></svg></a>
         <a href="https://www.instagram.com/offshore_vistas_consultancy/" aria-label="OVC on Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.5" cy="6.5" r=".6" fill="currentColor"/></svg></a>
@@ -148,7 +152,7 @@
     </div>
     <div><h4>Services</h4><ul><li><a href="/admission-guidelines/">Admission guidelines</a></li><li><a href="/career-counselling/">Career counselling</a></li><li><a href="/services/exam-preparation/">Exam preparation</a></li><li><a href="/services/visa-guidelines/">Visa guidelines</a></li></ul></div>
     <div><h4>Coaching</h4><ul><li><a href="/coaching/ielts/">IELTS</a></li><li><a href="/coaching/pte/">PTE</a></li><li><a href="/coaching/english-proficiency/">English proficiency</a></li><li><a href="/coaching/personality-development/">Personality development</a></li></ul></div>
-    <div><h4>Countries</h4><ul><li><a href="/country/australia/">Australia</a></li><li><a href="/country/canada/">Canada</a></li><li><a href="/country/new-zealand/">New Zealand</a></li><li><a href="/country/uk/">United Kingdom</a></li><li><a href="/country/usa/">USA</a></li></ul></div>
+    <div><h4>Countries</h4><ul><li><a href="/country/australia/">Australia</a></li><li><a href="/country/canada/">Canada</a></li><li><a href="/country/uk/">United Kingdom</a></li><li><a href="/country/europe/">Europe</a></li><li><a href="/country/new-zealand/">New Zealand</a></li><li><a href="/country/usa/">USA</a></li><li><a href="/country/asia/">Asia</a></li><li><a href="/universities/">Universities we work with</a></li></ul></div>
     <div><h4>Contact</h4><address>
       <a href="tel:918749961000">(+91)8749961000</a>
       <a href="mailto:info@ovconsultancy.com">info@ovconsultancy.com</a>
